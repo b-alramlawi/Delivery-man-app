@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:emarket_delivery_boy/utill/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,9 +19,9 @@ class LocalizationProvider extends ChangeNotifier {
 
   void setLanguage(Locale locale) {
     _locale = locale;
-    if(_locale.languageCode == 'ar') {
+    if (_locale.languageCode == 'ar') {
       _isLtr = false;
-    }else {
+    } else {
       _isLtr = true;
     }
     _saveLanguage(_locale);
@@ -28,13 +29,30 @@ class LocalizationProvider extends ChangeNotifier {
   }
 
   _loadCurrentLanguage() async {
-    _locale = Locale(sharedPreferences!.getString(AppConstants.languageCode) ?? 'en', sharedPreferences!.getString(AppConstants.countryCode) ?? 'US');
-    _isLtr = _locale.languageCode == 'en';
+    String? languageCode =
+        sharedPreferences?.getString(AppConstants.languageCode);
+    String? countryCode =
+        sharedPreferences?.getString(AppConstants.countryCode);
+
+    if (languageCode == null || countryCode == null) {
+      Locale systemLocale = PlatformDispatcher.instance.locale;
+
+      _locale =
+          Locale(systemLocale.languageCode, systemLocale.countryCode ?? 'US');
+      _isLtr = systemLocale.languageCode == 'en';
+
+      _saveLanguage(_locale);
+    } else {
+      _locale = Locale(languageCode, countryCode);
+      _isLtr = _locale.languageCode == 'en';
+    }
+
     notifyListeners();
   }
 
   _saveLanguage(Locale locale) async {
-    sharedPreferences!.setString(AppConstants.languageCode, locale.languageCode);
+    sharedPreferences!
+        .setString(AppConstants.languageCode, locale.languageCode);
     sharedPreferences!.setString(AppConstants.countryCode, locale.countryCode!);
   }
 }

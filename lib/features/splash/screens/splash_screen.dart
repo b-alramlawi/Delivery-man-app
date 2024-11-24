@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:emarket_delivery_boy/main.dart';
 import 'package:emarket_delivery_boy/utill/app_constants.dart';
 import 'package:emarket_delivery_boy/utill/styles.dart';
@@ -13,6 +12,8 @@ import 'package:emarket_delivery_boy/utill/images.dart';
 import 'package:emarket_delivery_boy/features/dashboard/screens/dashboard_screen.dart';
 import 'package:emarket_delivery_boy/features/language/screens/choose_language_screen.dart';
 import 'package:provider/provider.dart';
+
+import '../../auth/screens/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -38,8 +39,28 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(Images.logo, width: 200),
-
             Text(AppConstants.appName, style: rubikBold.copyWith(fontSize: 30)),
+            // simulate login button to test
+            TextButton(
+              style: TextButton.styleFrom(
+                minimumSize: const Size(1, 40),
+              ),
+              onPressed: () async => await Navigator.of(context).push(
+                MaterialPageRoute(
+                    builder: (_) =>
+                    const LoginScreen()),
+              ),
+              child: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                    text: getTranslated('login', context),
+                    style: rubikMedium.copyWith(
+                        color:
+                        Theme.of(context).textTheme.bodyLarge!.color),
+                  ),
+                ]),
+              ),
+            )
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:emarket_delivery_boy/helper/notification_helper.dart';
 import 'package:emarket_delivery_boy/utill/app_constants.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +30,15 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'key',
+        appId: 'id',
+        messagingSenderId: 'sendid',
+        projectId: 'myapp',
+        storageBucket: 'myapp-b9yt18.appspot.com',
+      )
+  );
 
   ///firebase crashlytics
 

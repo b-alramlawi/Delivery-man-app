@@ -3,10 +3,10 @@ import 'package:emarket_delivery_boy/utill/images.dart';
 
 class AppConstants {
 
-  static const String appName = 'Hexacom Delivery Man';
+  static const String appName = 'Deliver Mate';
   static const double appVersion = 7.2;
 
-  static const String baseUrl = 'YOUR_BASE_URL_HERE';
+  static const String baseUrl = 'https://api.example.com';
   static const String profileUri = '/api/v1/delivery-man/profile?token=';
   static const String configUri = '/api/v1/config';
   static const String loginUri = '/api/v1/auth/delivery-man/login';

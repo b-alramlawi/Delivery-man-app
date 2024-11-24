@@ -1,7 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:emarket_delivery_boy/features/auth/domain/models/delivery_man_body_model.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:emarket_delivery_boy/data/datasource/remote/dio/dio_client.dart';
 import 'package:emarket_delivery_boy/data/datasource/remote/exception/api_error_handler.dart';
 import 'package:emarket_delivery_boy/commons/models/api_response.dart';
@@ -56,7 +56,9 @@ class AuthRepo {
   }
 
   Future<String?> _saveDeviceToken() async {
-    String? deviceToken = await FirebaseMessaging.instance.getToken();
+    // String? deviceToken = await FirebaseMessaging.instance.getToken();
+    String? deviceToken = await 'FirebaseMessaging.instance.getToken()';
+
     if (deviceToken != null) {
       debugPrint('--------Device Token---------- $deviceToken');
     }
